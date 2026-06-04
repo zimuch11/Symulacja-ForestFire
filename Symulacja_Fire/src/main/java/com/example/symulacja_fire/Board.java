@@ -66,8 +66,8 @@ public class Board {
         return neighbours;
     }
 
-    public List<Cell> getClosestfire(int pos_x, int pos_y){
-        List<Cell> closestFirelist = new ArrayList<>();
+    public List<int[]> getClosestfire(int pos_x, int pos_y){
+        List<int[]> closestFirelist = new ArrayList<>();
         double pyt_final=1000000;
         int x_final=0;
         int y_final=0;
@@ -95,15 +95,33 @@ public class Board {
         } else {
             System.out.printf("Closest fire: Distance: "+"%.2f"+", Fire |x:"+"%d"+", y:"+"%d"+"| <__> Firefighter|x: "+"%d"+", y:"+"%d"+"|\n",pyt_final, x_final, y_final, pos_x, pos_y);
         }
-        closestFirelist.add(cells[x_final][y_final]);
+        closestFirelist.add(new int[]{x_final, y_final});
         return closestFirelist;
     }
 
+    public int[] moveFirefigh(List<int[]>closestFirelist, int[] i){
+        int x_fire = closestFirelist.get(0)[0];
+        int y_fire = closestFirelist.get(0)[1];
+        if(i[1]>x_fire){
+            i[1]-=1;
+        } else if (i[1]<x_fire){
+            i[1]+=1;
+        }
+        if(i[2]>y_fire){
+            i[2]-=1;
+        } else if (i[2]<y_fire){
+            i[2]+=1;
+        }
+        return i;
+    }
 
     public void fireFighlogic(List<int[]> firefighs) {
         for (int[] i : firefighs){
 //            System.out.println("id: "+i[0]+", x: "+i[1]+", y: "+i[2]);
-            getClosestfire(i[1],i[2]);
+            int[] nextPosition = moveFirefigh(getClosestfire(i[1],i[2]),i);
+            i[0] = nextPosition[0];
+            i[1] = nextPosition[1];
+//            moveFirefigh(getClosestfire(i[1],i[2]),i);
         }
     }
 
