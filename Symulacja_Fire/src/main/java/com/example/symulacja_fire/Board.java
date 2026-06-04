@@ -66,6 +66,47 @@ public class Board {
         return neighbours;
     }
 
+    public List<Cell> getClosestfire(int pos_x, int pos_y){
+        List<Cell> closestFirelist = new ArrayList<>();
+        double pyt_final=1000000;
+        int x_final=0;
+        int y_final=0;
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+
+                Cell cell = cells[x][y];
+
+                if (cell.isOnFire()) {
+                    double dx = pos_x - x;
+                    dx = Math.abs(dx);
+                    double dy = pos_y - y;
+                    dy = Math.abs(dy);
+                    double pyt = Math.sqrt((dx*dx)+(dy*dy));
+                    if(pyt_final>pyt){
+                        pyt_final=pyt;
+                        x_final=x;
+                        y_final=y;
+                    }
+                }
+            }
+        }
+        if(pyt_final==1000000){
+            System.out.println("No fire");
+        } else {
+            System.out.printf("Closest fire: Distance: "+"%.2f"+", Fire |x:"+"%d"+", y:"+"%d"+"| <__> Firefighter|x: "+"%d"+", y:"+"%d"+"|\n",pyt_final, x_final, y_final, pos_x, pos_y);
+        }
+        closestFirelist.add(cells[x_final][y_final]);
+        return closestFirelist;
+    }
+
+
+    public void fireFighlogic(List<int[]> firefighs) {
+        for (int[] i : firefighs){
+//            System.out.println("id: "+i[0]+", x: "+i[1]+", y: "+i[2]);
+            getClosestfire(i[1],i[2]);
+        }
+    }
+
     public void burnTrees() {
 
         for (int x = 0; x < width; x++) {
@@ -140,5 +181,6 @@ public class Board {
 
         return 100.0 * burned / total;
     }
+
 }
 
