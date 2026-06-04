@@ -1,27 +1,42 @@
 package com.example.symulacja_fire;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Simulation {
-    private final int heigh;
+    private final int height;
     private final int width;
     private final int numFireFigh;
     private final int numHeli;
     private Board board;
     private int stepCount;
     private boolean isRunning;
+    private List<int[]> firefighs = new ArrayList<>();
 
 
 
     public Simulation(int width, int height, double forestation, int numFireFigh, int numHeli) {
         this.numFireFigh = numFireFigh;
         this.numHeli = numHeli;
-        this.heigh = height;
+        this.height = height;
         this.width = width;
         board = new Board(width, height, forestation);
     }
 
     public void initialize() {
         stepCount=0;
-        for (int y=0; y < heigh; y++) {
+        for (int y=0; y < numFireFigh; y++){
+            int fightx = (int) (width*0.75);
+            int fighty = (int) (height*y/numFireFigh);
+            firefighs.add(new int[]{y, fightx,fighty});
+        }
+
+        for (int[] i : firefighs){
+            System.out.println("id: "+i[0]+", x: "+i[1]+", y: "+i[2]);
+        } //Wypisuje wszystkich strazakow którym zostały przydzielone pola na plaszy
+
+        for (int y=0; y < height; y++) {
             Cell fireCell = board.getCell(0, y);
             if (fireCell instanceof ForestCellv2 tree) {
                 tree.ignite();
@@ -31,6 +46,7 @@ public class Simulation {
 
     public void step() {
         stepCount ++;
+        board.fireFighlogic(firefighs);
         board.burnTrees();
         board.spreadFire();
         System.out.printf(
@@ -38,6 +54,7 @@ public class Simulation {
                 stepCount,
                 board.getBurningPercentage(),
                 board.getBurnedPercentage());
+//                board.getClosestfire(500,50));
     }
     public void run(int steps){
         for (int i = 0; i < steps; i++) {
