@@ -1,14 +1,15 @@
 package com.example.symulacja_fire;
 
-import java.security.PublicKey;
-
 public class ForestCell extends Cell {
     private int resources;
     private boolean onFire;
+    private boolean burnt;
 
 
     public ForestCell(int resources) {
         this.resources = resources;
+        this.onFire = false;
+        this.burnt = false;
     }
 
     @Override
@@ -16,23 +17,21 @@ public class ForestCell extends Cell {
         return true;
     }
     @Override
-    public boolean isOnFire(){
-        return onFire;
-    }
-    @Override
     public void ignite(){
         onFire=true;
     }
+    @Override
+    public boolean isOnFire(){
+        return onFire;
+    }
 
     public void burn() {
-        if (onFire){
+        if (resources > 0) {
             resources--;
         }
-        if (resources <= 0) {
-            onFire=false;
-        }
+    }
+    public boolean isBurnt(){
+        if (resources<=0) return true;
+        else return false;
     }
 }
-
-
-
