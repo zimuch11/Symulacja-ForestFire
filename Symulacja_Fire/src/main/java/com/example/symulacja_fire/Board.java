@@ -20,9 +20,7 @@ public class Board {
         this.height = height;
         this.forestation = forestation;
         this.resources = resources;
-
         cells = new Cell[width][height];
-
         createBoard();
     }
 
@@ -30,12 +28,9 @@ public class Board {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (x >= width - (width * cityPart)) {
-                    if(x <= width - ((width * cityPart)-2))
-                        cells[x][y] = new EmptyCell();
-                    else {
                         cells[x][y] = new CityCell();
                     }
-                } else {
+                 else {
                     if (random.nextDouble() < forestation) {
                         cells[x][y] = new ForestCell(resources);
                         numForest++;
@@ -103,10 +98,10 @@ public class Board {
                     double dy = pos_y - y;
                     dy = Math.abs(dy);
                     double pyt = Math.sqrt((dx*dx)+(dy*dy));
-                    if(pyt_final>pyt){
-                        pyt_final=pyt;
-                        x_final=x;
-                        y_final=y;
+                    if(pyt_final > pyt){
+                        pyt_final = pyt;
+                        x_final = x;
+                        y_final = y;
                     }
                 }
             }
@@ -118,7 +113,7 @@ public class Board {
         } else {
 //            System.out.printf("Closest fire: Distance: "+"%.2f"+", Fire |x:"+"%d"+", y:"+"%d"+"| <__> %s|x: "+"%d"+", y:"+"%d"+",fuel: %d|\n",pyt_final, x_final, y_final, typeh, pos_x, pos_y, fuel);
         }
-        if(pyt_final>1&&pyt_final<2){
+        if(pyt_final > 1 && pyt_final < 2){
             pyt_final = 2;
         }
         closestFirelist.add(new int[]{x_final, y_final, (int)pyt_final});
@@ -130,21 +125,21 @@ public class Board {
         int nxt = r.nextInt(2);
         int x_fire = closestFirelist.get(0)[0];
         int y_fire = closestFirelist.get(0)[1];
-        if(i[1]>x_fire){
-            i[1]-=1+nxt;
-        } else if (i[1]<x_fire){
-            i[1]+=1+nxt;
+        if(i[1] > x_fire){
+            i[1] -= 1 + nxt;
+        } else if (i[1] < x_fire){
+            i[1] += 1 + nxt;
         }
-        if(i[2]>y_fire){
-            i[2]-=1+nxt;
-        } else if (i[2]<y_fire){
-            i[2]+=1+nxt;
+        if(i[2] > y_fire){
+            i[2] -= 1 + nxt;
+        } else if (i[2] < y_fire){
+            i[2] += 1 + nxt;
         }
         return i;
     }
 
     public int extinguishfire(int[] i, List<int[]> pyt){
-        int fuelloss=0;
+        int fuelloss = 0;
         String type;
         if(i[4]==-1){
             type = "Firefighter";
@@ -159,23 +154,27 @@ public class Board {
 //        System.out.print(pyt.get(0)[0]+", ");
 //        System.out.print(pyt.get(0)[1]+", ");
 //        System.out.println(pyt.get(0)[2]);
-        if(pyt.get(0)[2]<=1){
+        if(pyt.get(0)[2] <= 1){
             int[][] celllist = new int[0][];
-            if(x>pyt.get(0)[0]&&type.equals("Firefighter")){
+            if(x > pyt.get(0)[0] && type.equals("Firefighter")){
                 direction = "left";
             }
-            if(x<pyt.get(0)[0]&&type.equals("Firefighter")){
+            if(x < pyt.get(0)[0] && type.equals("Firefighter")){
                 direction = "right";
             }
-            if(y>pyt.get(0)[1]&&type.equals("Firefighter")){
+            if(y > pyt.get(0)[1] && type.equals("Firefighter")){
                 direction = "up";
             }
-            if(y<pyt.get(0)[1]&&type.equals("Firefighter")){
+            if(y < pyt.get(0)[1] && type.equals("Firefighter")){
                 direction = "down";
             }
-            if(pyt.get(0)[2]==0){
-                direction = "around";
+            if( type.equals("Helicopter")){
+                direction = "heli";
+           if(pyt.get(0)[2]==0 && type.equals("Firefighter")){
+                    direction = "around";
+                }
             }
+
 //            System.out.println(direction);
             switch(direction){
                 case "left":
@@ -223,6 +222,19 @@ public class Board {
                             {0, -2}, {1, -2}, {2, -2}, {-1, -2}, {-2, -2}
                     };
                     break;
+                case "heli":
+                    int size = 30;
+                    celllist = new int[size * size][2];
+                    int index = 0;
+
+                    for (int w = -size / 2; w < size / 2; w++) {
+                        for (int d = -size / 2; d < size / 2; d++) {
+                            celllist[index][0] = d;
+                            celllist[index][1] = w;
+                            index++;
+                        }
+                    }
+                    break;
             }
             for (int[] cellh : celllist){
                 int nx = x + cellh[0];
@@ -235,7 +247,7 @@ public class Board {
                     }
                 }
             }
-            fuelloss=-1;
+            fuelloss = -1;
         };
 //        System.out.println(fuelloss);
         return fuelloss;
@@ -252,16 +264,19 @@ public class Board {
             int[] nextPosition = moveFirefigh(pyt,i);
             i[1] = nextPosition[1];
             i[2] = nextPosition[2];
-            i[3]+=fuelloss;
+            i[3] += fuelloss;
         }
     }
 
     public void helislogic(List<int[]> helis) {
         for (int[] h : helis){
             int fuelloss=0;
+            int offset=6;
             List <int[]> pyt=getClosestfire(h[1],h[2],h[6],h[5],h[3],h[4]);
+            ;
             if (h[1] == h[3] && h[2] == h[4]) {
-                h[5] = 5;
+                h[1] -= offset;
+                h[5] = 1;
             }
             fuelloss = extinguishfire(h,pyt);
             if(pyt.get(0)[0]>=h[3]-200){
@@ -271,6 +286,24 @@ public class Board {
                 h[5]+=fuelloss;
             }
         }
+    }
+
+    public boolean cityOnFire() {
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+
+                Cell cell = cells[x][y];
+
+                if (cell instanceof CityCell &&
+                        cell.isOnFire()) {
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public double getBurningPercentage() {

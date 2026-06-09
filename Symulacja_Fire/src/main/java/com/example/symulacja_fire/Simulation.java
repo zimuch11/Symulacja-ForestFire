@@ -8,6 +8,7 @@ public class Simulation {
     private final int width;
     private final int numFireFigh;
     private final int numHeli;
+    private  final double spredChance;
     private int resources;
     private Board board;
     private Fire fire;
@@ -18,14 +19,15 @@ public class Simulation {
 
 
 
-    public Simulation(int width, int height, double forestation, int numFireFigh, int numHeli, int resources) {
+    public Simulation(int width, int height, double forestation, int numFireFigh, int numHeli, int resources, double spredChance) {
         this.numFireFigh = numFireFigh;
         this.numHeli = numHeli;
         this.height = height;
         this.width = width;
         this.resources = resources;
+        this.spredChance = spredChance;
         board = new Board(width, height, forestation,resources);
-        fire = new Fire();
+        fire = new Fire(spredChance);
     }
 
     public void initialize() {
@@ -41,14 +43,14 @@ public class Simulation {
 
         for (int y=0; y < numHeli; y++){
             int type = -2;
-            int fuel = 5;
+            int fuel = 50;
             int fightx = (int) (width*0.95);
             int fighty = (int) (height*y/numHeli);
             helis.add(new int[]{y, fightx, fighty, fightx, fighty, fuel, type});
         } //Helis initialize
 
         for (int[] i : firefighs){
-            System.out.println("id: "+i[0]+", x: "+i[1]+", y: "+i[2]);
+            //System.out.println("id: "+i[0]+", x: "+i[1]+", y: "+i[2]);
         } //Wypisuje wszystkich strazakow którym zostały przydzielone pola na plaszy
 
         for (int y=0; y < height; y++) {
@@ -68,11 +70,15 @@ public class Simulation {
         }
         fire.burnTrees(board);
         fire.spreadFire(board);
-        System.out.printf(
-                "Step %d |Burning: %.2f%% | Burned: %.2f%%%n",
-                stepCount,
-                board.getBurningPercentage(),
-                board.getBurnedPercentage());
+        if (board.cityOnFire()) {
+            isRunning = false;
+            System.out.println("Ogień dotarł do miasta");
+        }
+//        System.out.printf(
+//                "Step %d |Burning: %.2f%% | Burned: %.2f%%%n",
+//                stepCount
+//                board.getBurningPercentage(),
+//                board.getBurnedPercentage());
 //                board.getClosestfire(500,50));
     }
     public void run(int steps){
