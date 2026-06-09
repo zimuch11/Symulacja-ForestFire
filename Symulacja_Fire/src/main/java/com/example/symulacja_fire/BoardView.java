@@ -61,5 +61,16 @@ public class BoardView {
 
             gc.fillRect(fx * cellSize, fy * cellSize, cellSize, cellSize);
         }
+
+        List<int[]> helicopters = simulation.getHelicopters();
+
+        gc.setFill(Color.BROWN);
+
+        for (int[] helicopter : helicopters) {
+            int fx = helicopter[1];
+            int fy = helicopter[2];
+
+            gc.fillRect(fx * cellSize, fy * cellSize, cellSize, cellSize);
+        }
     }
 }

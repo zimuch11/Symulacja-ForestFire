@@ -23,7 +23,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        simulation = new Simulation(100, 100, 0.6, 5, 0,30);
+        simulation = new Simulation(100, 100, 0.6, 50, 50,30);
 
         simulation.initialize();
 

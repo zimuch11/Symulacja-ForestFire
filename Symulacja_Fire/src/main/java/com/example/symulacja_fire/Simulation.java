@@ -14,6 +14,7 @@ public class Simulation {
     private int stepCount;
     boolean isRunning;
     private List<int[]> firefighs = new ArrayList<>();
+    private List<int[]> helis = new ArrayList<>();
 
 
 
@@ -31,10 +32,20 @@ public class Simulation {
         stepCount=0;
         isRunning=true;
         for (int y=0; y < numFireFigh; y++){
-            int fightx = (int) (width);
+            int type = -1;
+            int fuel = 5;
+            int fightx = (int) (width*0.9);
             int fighty = (int) (height*y/numFireFigh);
-            firefighs.add(new int[]{y, fightx,fighty});
-        }
+            firefighs.add(new int[]{y, fightx, fighty, fuel, type, fightx, fighty});
+        } //Strazak initialize
+
+        for (int y=0; y < numHeli; y++){
+            int type = -2;
+            int fuel = 5;
+            int fightx = (int) (width*0.95);
+            int fighty = (int) (height*y/numHeli);
+            helis.add(new int[]{y, fightx, fighty, fightx, fighty, fuel, type});
+        } //Helis initialize
 
         for (int[] i : firefighs){
             System.out.println("id: "+i[0]+", x: "+i[1]+", y: "+i[2]);
@@ -51,7 +62,10 @@ public class Simulation {
 
     public void step() {
         stepCount ++;
-        board.fireFighlogic(firefighs);
+        for(int i=0;i<=1;i++){
+            board.fireFighlogic(firefighs);
+            board.helislogic(helis);
+        }
         fire.burnTrees(board);
         fire.spreadFire(board);
         System.out.printf(
@@ -110,5 +124,8 @@ public class Simulation {
 
     public List<int[]> getFirefighters() {
         return this.firefighs;
+    }
+    public List<int[]> getHelicopters() {
+        return this.helis;
     }
 }
