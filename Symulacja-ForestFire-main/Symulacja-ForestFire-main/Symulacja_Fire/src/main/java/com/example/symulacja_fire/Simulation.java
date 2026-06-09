@@ -29,10 +29,10 @@ public class Simulation {
         stepCount=0;
         for (int y=0; y < numFireFigh; y++){
             int type = -1;
-            int fuel = 10;
+            int fuel = 5;
             int fightx = (int) (width*0.75);
             int fighty = (int) (height*y/numFireFigh);
-            firefighs.add(new int[]{y, fightx, fighty, fuel, type});
+            firefighs.add(new int[]{y, fightx, fighty, fuel, type, fightx, fighty});
         } //Strazak initialize
 
         for (int y=0; y < numHeli; y++){
@@ -61,8 +61,10 @@ public class Simulation {
 
     public void step() {
         stepCount ++;
-        board.fireFighlogic(firefighs);
-        board.helislogic(helis);
+        for(int i=0;i<=5;i++){
+            board.fireFighlogic(firefighs);
+            board.helislogic(helis);
+        }
         board.burnTrees();
         board.spreadFire();
         System.out.printf(

@@ -5,7 +5,6 @@ public class ForestCellv2 extends Cell {
     private boolean onFire;
     private boolean burnt;
 
-
     public ForestCellv2(int resources) {
         this.resources = resources;
         this.onFire = false;
