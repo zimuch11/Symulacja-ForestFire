@@ -264,7 +264,7 @@ public class Board {
                 h[5] = 5;
             }
             fuelloss = extinguishfire(h,pyt);
-            if(pyt.get(0)[0]>=h[3]-200){
+            if(pyt.get(0)[0]>=h[3]-(width/2)){
                 int[] nextPosition = moveFirefigh(pyt,h);
                 h[0] = nextPosition[0];
                 h[1] = nextPosition[1];

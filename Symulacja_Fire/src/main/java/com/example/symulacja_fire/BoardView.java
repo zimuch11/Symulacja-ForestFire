@@ -64,7 +64,7 @@ public class BoardView {
 
         List<int[]> helicopters = simulation.getHelicopters();
 
-        gc.setFill(Color.BROWN);
+        gc.setFill(Color.BLUE);
 
         for (int[] helicopter : helicopters) {
             int fx = helicopter[1];
