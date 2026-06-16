@@ -4,7 +4,11 @@ import java.util.Random;
 
 public class Fire {
 
-    private final double spreadChance = 0.2;
+    private final double spreadChance;
+
+    public Fire(double spreadChance) {
+        this.spreadChance = spreadChance;
+    }
 
     private final Random random = new Random();
 

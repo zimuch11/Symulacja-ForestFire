@@ -8,8 +8,11 @@ public class Simulation {
     private final int width;
     private final int numFireFigh;
     private final int numHeli;
+    private  final double spredChance;
     private int resources;
     private Board board;
+    private Firefighter firefighter;
+    private Helicopter helicopter;
     private Fire fire;
     private int stepCount;
     boolean isRunning;
@@ -18,14 +21,17 @@ public class Simulation {
 
 
 
-    public Simulation(int width, int height, double forestation, int numFireFigh, int numHeli, int resources) {
+    public Simulation(int width, int height, double forestation, int numFireFigh, int numHeli, int resources, double spredChance) {
         this.numFireFigh = numFireFigh;
         this.numHeli = numHeli;
         this.height = height;
         this.width = width;
         this.resources = resources;
+        this.spredChance = spredChance;
         board = new Board(width, height, forestation,resources);
-        fire = new Fire();
+        firefighter = new Firefighter(width, height);
+        helicopter = new Helicopter(width, height);
+        fire = new Fire(spredChance);
     }
 
     public void initialize() {
@@ -33,23 +39,26 @@ public class Simulation {
         isRunning=true;
         for (int y=0; y < numFireFigh; y++){
             int type = -1;
-            int fuel = 5;
+            int fuel = 15;
+            /** Dla Strażaków i Helikopterów
+             * @param y to id (0,1,2....)
+             * @param fightx to pozycja x strażaka/helikoptera na planszy i położenie x ognia
+             * @param fighty to pozycja y strażaka/helikoptera na planszy i położenie y ognia
+             * @param fuel ile razy może podjąć gaszenie
+             * @param type -1 = Strażak, -2 = Helikopter
+             */
             int fightx = (int) (width*0.9);
-            int fighty = (int) (height*y/numFireFigh);
+            int fighty = (int) (height*y/numFireFigh)+(height/numFireFigh/2);
             firefighs.add(new int[]{y, fightx, fighty, fuel, type, fightx, fighty});
         } //Strazak initialize
 
         for (int y=0; y < numHeli; y++){
             int type = -2;
-            int fuel = 5;
+            int fuel = 50;
             int fightx = (int) (width*0.95);
-            int fighty = (int) (height*y/numHeli);
+            int fighty = (int) (height*y/numHeli)+(height/numHeli/2);
             helis.add(new int[]{y, fightx, fighty, fightx, fighty, fuel, type});
         } //Helis initialize
-
-        for (int[] i : firefighs){
-            System.out.println("id: "+i[0]+", x: "+i[1]+", y: "+i[2]);
-        } //Wypisuje wszystkich strazakow którym zostały przydzielone pola na plaszy
 
         for (int y=0; y < height; y++) {
             Cell fireCell = board.getCell(0, y);
@@ -62,18 +71,21 @@ public class Simulation {
 
     public void step() {
         stepCount ++;
-        for(int i=0;i<=1;i++){
-            board.fireFighlogic(firefighs);
-            board.helislogic(helis);
+        for(int i=0;i<=1;i++){ ///Część logiki strażaków i helikopterów
+            firefighter.fireFighlogic(firefighs);
+            helicopter.helislogic(helis);
         }
         fire.burnTrees(board);
         fire.spreadFire(board);
+//        if (board.cityOnFire()&&stepCount==250) {
+//            isRunning = false;
+//            System.out.println("Ogień dotarł do miasta: "+"Heli: "+numHeli+ " Strazak: "+numFireFigh);
+//        }
         System.out.printf(
                 "Step %d |Burning: %.2f%% | Burned: %.2f%%%n",
                 stepCount,
                 board.getBurningPercentage(),
                 board.getBurnedPercentage());
-//                board.getClosestfire(500,50));
     }
     public void run(int steps){
         for (int i = 0; i < steps; i++) {
