@@ -24,6 +24,12 @@ public class Board {
         createBoard();
     }
 
+    /**
+     * <h1>createBoard</h1>
+     * Metoda tworząca nową plaszę do długości width i wysokości height.
+     * <li>citypart - procent jaki miasto zajmuje na plaszy
+     * <li>forestation - procent jaki las zajmuje na pustych obszarach plaszy
+     */
     private void createBoard() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -46,6 +52,13 @@ public class Board {
         return cells[x][y];
     }
 
+    /**
+     * <h1>getNeighbours</h1>
+     * Metoda szuka komórek wokół koordynatów x i y na planszy
+     * @param x pozycja x na planszy
+     * @param y pozycja y na planszy
+     * @return zwraca listę komórek dookoła komórki cell[x][y]
+     */
     public List<Cell> getNeighbours(int x, int y ) {
 
         List<Cell> neighbours = new ArrayList<>();
@@ -292,6 +305,11 @@ public class Board {
         return false;
     }
 
+    /**
+     * <h1>getBurningPercentage</h1>
+     * Metoda licząca procent płonącego się lasu.
+     * @return procent palącego się lasu
+     */
     public double getBurningPercentage() {
 
         int burning = 0;
@@ -311,6 +329,12 @@ public class Board {
 
         return 100.0 * burning / numForest;
     }
+
+    /**
+     * <h1>getBurnedPercentage</h1>
+     * Metoda licząca procent spalonego lasu.
+     * @return procent spalonego lasu
+     */
     public double getBurnedPercentage() {
 
         int burned = 0;
