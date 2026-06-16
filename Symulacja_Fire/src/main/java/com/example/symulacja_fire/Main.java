@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.Animation;
@@ -19,11 +20,13 @@ public class Main extends Application {
     private Simulation simulation;
     private BoardView boardView;
     private StatsView statsView;
+    private Timeline timeline;
+
 
     @Override
     public void start(Stage stage) {
 
-        simulation = new Simulation(100, 100, 0.6, 50, 50,30);
+        simulation = new Simulation(200, 200, 0.65, 35, 0,35, 0.2);
 
         simulation.initialize();
 
@@ -42,7 +45,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-        Timeline timeline = new Timeline(
+       timeline = new Timeline(
                 new KeyFrame(Duration.millis(refreshTime),
                         e -> {
                             if (simulation.isRunning()) {
@@ -51,8 +54,12 @@ public class Main extends Application {
                                 statsView.update(simulation);
                             }
                             else {
-                                ((Timeline) e.getSource()).stop();
-                                System.out.println("Symulacja zakończona.");
+                                timeline.stop();
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Koniec symulacji");
+                                alert.setHeaderText(null);
+                                alert.setContentText("Ogień dotarł do miasta!");
+                                alert.show();
                             }
                         }
                 )
