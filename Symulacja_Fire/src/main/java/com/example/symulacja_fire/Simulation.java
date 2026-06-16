@@ -40,6 +40,13 @@ public class Simulation {
         for (int y=0; y < numFireFigh; y++){
             int type = -1;
             int fuel = 15;
+            /** Dla Strażaków i Helikopterów
+             * @param y to id (0,1,2....)
+             * @param fightx to pozycja x strażaka/helikoptera na planszy i położenie x ognia
+             * @param fighty to pozycja y strażaka/helikoptera na planszy i położenie y ognia
+             * @param fuel ile razy może podjąć gaszenie
+             * @param type -1 = Strażak, -2 = Helikopter
+             */
             int fightx = (int) (width*0.9);
             int fighty = (int) (height*y/numFireFigh)+(height/numFireFigh/2);
             firefighs.add(new int[]{y, fightx, fighty, fuel, type, fightx, fighty});
@@ -53,10 +60,6 @@ public class Simulation {
             helis.add(new int[]{y, fightx, fighty, fightx, fighty, fuel, type});
         } //Helis initialize
 
-        for (int[] i : firefighs){
-            //System.out.println("id: "+i[0]+", x: "+i[1]+", y: "+i[2]);
-        } //Wypisuje wszystkich strazakow którym zostały przydzielone pola na plaszy
-
         for (int y=0; y < height; y++) {
             Cell fireCell = board.getCell(0, y);
             if (fireCell instanceof ForestCell tree) {
@@ -68,7 +71,7 @@ public class Simulation {
 
     public void step() {
         stepCount ++;
-        for(int i=0;i<=1;i++){
+        for(int i=0;i<=1;i++){ ///Część logiki strażaków i helikopterów
             firefighter.fireFighlogic(firefighs);
             helicopter.helislogic(helis);
         }
@@ -83,7 +86,6 @@ public class Simulation {
                 stepCount,
                 board.getBurningPercentage(),
                 board.getBurnedPercentage());
-//                board.getClosestfire(500,50));
     }
     public void run(int steps){
         for (int i = 0; i < steps; i++) {

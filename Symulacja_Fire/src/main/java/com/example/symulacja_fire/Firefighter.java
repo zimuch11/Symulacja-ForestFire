@@ -9,7 +9,12 @@ public class Firefighter{
         this.width = width;
         this.height = height;
     }
-    ///fireFighLogic - Metoda która obejmuje wszystkie zachowania dla wygenerowanych na planszy Strażaków
+
+    /**
+     * fireFighLogic - Metoda która obejmuje wszystkie zachowania dla wygenerowanych na planszy Strażaków
+     * @param firefighs zawiera listę wszystkich strażaków i wartości z nimi związane
+     * fuelloss dekrementuje wartość fuel
+     */
     public void fireFighlogic(List<int[]> firefighs) {
         for (int[] i : firefighs){
             int fuelloss=0;

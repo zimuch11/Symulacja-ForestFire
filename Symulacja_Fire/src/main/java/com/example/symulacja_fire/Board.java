@@ -70,8 +70,16 @@ public class Board {
         return neighbours;
     }
 
-    ///getClosestfire - Metoda która szuka i zwraca pozycję najbliższego oginia na planszy względem pos_x i pos_y
-    ///Jeżeli poziom wody jest <= 0, to Strazak/Helikopter wraca po wodę do pozycji początkowej startx i starty
+    /**
+     * getClosestfire - Metoda która szuka i zwraca pozycję najbliższego ognia na planszy względem pos_x i pos_y
+     * @param pos_x aktualna pozycja helikoptera/strażaka dla x
+     * @param pos_y aktualna pozycja helikoptera/strażaka dla y
+     * @param type typ obiektu (-1 = strażak, -2 = helikopter)
+     * @param fuel wartość zbiornika wody
+     * @param startx stała wartość x, jest to pozycja startowa dla helikoptera/strażaka
+     * @param starty stała wartość x, jest to pozycja startowa dla helikoptera/strażaka
+     * @return zwraca pozycję najbliższego ognia (Bądź miejsce startowe gdy fuel <= 0) oraz odległość od tego ognia
+     */
     public static List<int[]> getClosestfire(int pos_x, int pos_y, int type, int fuel, int startx, int starty){
 
         List<int[]> closestFirelist = new ArrayList<>();
@@ -118,6 +126,11 @@ public class Board {
     }
 
     ///moveFireFight - Metoda odpowiedzialna za poruszanie się Strażaka/Helikoptera w kierunku najbliższego ognia
+    /**
+     * @param closestFirelist zawiera położenie najbliższego ognia
+     * @param i lista zawierająca informacje o strażaku/helikopterze
+     * @return zwraca i ze zmodyfikowaną pozycją
+     */
     public static int[] moveFirefigh(List<int[]> closestFirelist, int[] i){
 
         Random r = new Random();
@@ -140,9 +153,14 @@ public class Board {
         return i;
     }
 
-    ///extinguishfire - Metoda zachowania gaszenia palących się komórek przez Strażaków/Helikopterów
-    ///Strażacy gaszą naokoło na małym obszarze w kształcie stożka
-    ///Helikoptery gaszą na dużym kwadratowym obszarze
+    /**
+     * extinguishfire - Metoda zachowania gaszenia palących się komórek przez Strażaków/Helikopterów
+     * Strażacy gaszą naokoło na małym obszarze w kształcie stożka
+     * Helikoptery gaszą na dużym kwadratowym obszarze
+     * @param i lista zawierająca informacje o strażaku/helikopterze
+     * @param pyt zawiera położenie najbliższego ognia
+     * @return -1 -> dokonano gaszenia pożaru, 0 -> nie dokonano gaszenia w tym kroku
+     */
     public static int extinguishfire(int[] i, List<int[]> pyt){
         int fuelloss = 0;
         String type;
