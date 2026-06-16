@@ -71,7 +71,8 @@ public class Board {
     }
 
     /**
-     * getClosestfire - Metoda która szuka i zwraca pozycję najbliższego ognia na planszy względem pos_x i pos_y
+     * <h1>getClosestfire</h1>
+     * Metoda która szuka i zwraca pozycję najbliższego ognia na planszy względem pos_x i pos_y
      * @param pos_x aktualna pozycja helikoptera/strażaka dla x
      * @param pos_y aktualna pozycja helikoptera/strażaka dla y
      * @param type typ obiektu (-1 = strażak, -2 = helikopter)
@@ -125,8 +126,9 @@ public class Board {
 
     }
 
-    ///moveFireFight - Metoda odpowiedzialna za poruszanie się Strażaka/Helikoptera w kierunku najbliższego ognia
     /**
+     * <h1>moveFirefigh</h1>
+     * Metoda odpowiedzialna za poruszanie się Strażaka/Helikoptera w kierunku najbliższego ognia
      * @param closestFirelist zawiera położenie najbliższego ognia
      * @param i lista zawierająca informacje o strażaku/helikopterze
      * @return zwraca i ze zmodyfikowaną pozycją
@@ -154,9 +156,10 @@ public class Board {
     }
 
     /**
-     * extinguishfire - Metoda zachowania gaszenia palących się komórek przez Strażaków/Helikopterów
-     * Strażacy gaszą naokoło na małym obszarze w kształcie stożka
-     * Helikoptery gaszą na dużym kwadratowym obszarze
+     * <h1>extinguishfire</h1>
+     * Metoda zachowania gaszenia palących się komórek przez Strażaków/Helikopterów.
+     * Strażacy gaszą naokoło na małym obszarze w kształcie stożka a
+     * helikoptery gaszą na dużym kwadratowym obszarze
      * @param i lista zawierająca informacje o strażaku/helikopterze
      * @param pyt zawiera położenie najbliższego ognia
      * @return -1 -> dokonano gaszenia pożaru, 0 -> nie dokonano gaszenia w tym kroku

@@ -11,7 +11,8 @@ public class Firefighter{
     }
 
     /**
-     * fireFighLogic - Metoda która obejmuje wszystkie zachowania dla wygenerowanych na planszy Strażaków
+     * <h1>fireFighLogic</h1>
+     * Metoda która obejmuje wszystkie zachowania dla wygenerowanych na planszy Strażaków
      * @param firefighs zawiera listę wszystkich strażaków i wartości z nimi związane
      * fuelloss dekrementuje wartość fuel
      */

@@ -40,13 +40,6 @@ public class Simulation {
         for (int y=0; y < numFireFigh; y++){
             int type = -1;
             int fuel = 15;
-            /** Dla Strażaków i Helikopterów
-             * @param y to id (0,1,2....)
-             * @param fightx to pozycja x strażaka/helikoptera na planszy i położenie x ognia
-             * @param fighty to pozycja y strażaka/helikoptera na planszy i położenie y ognia
-             * @param fuel ile razy może podjąć gaszenie
-             * @param type -1 = Strażak, -2 = Helikopter
-             */
             int fightx = (int) (width*0.9);
             int fighty = (int) (height*y/numFireFigh)+(height/numFireFigh/2);
             firefighs.add(new int[]{y, fightx, fighty, fuel, type, fightx, fighty});

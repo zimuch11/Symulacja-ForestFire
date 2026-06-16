@@ -9,8 +9,9 @@ public class Helicopter{
         this.width = width;
         this.height = height;
     }
-    /**f
-     * helislogic - Metoda która obejmuje wszystkie zachowania dla wygenerowanych na planszy Helikopterów
+    /**
+     * <h1>helislogic</h1>
+     * Metoda która obejmuje wszystkie zachowania dla wygenerowanych na planszy Helikopterów
      * @param helis zawiera listę wszystkich helikopterów i wartości z nimi związane
      * fuelloss dekrementuje wartość fuel
      */
