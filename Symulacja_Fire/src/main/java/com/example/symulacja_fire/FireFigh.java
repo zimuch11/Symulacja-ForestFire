@@ -1,6 +1,5 @@
 package com.example.symulacja_fire;
 
-import java.util.List;
 import java.util.Random;
 
 public class FireFigh {

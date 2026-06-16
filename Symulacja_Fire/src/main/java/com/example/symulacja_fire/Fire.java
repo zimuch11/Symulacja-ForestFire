@@ -12,6 +12,12 @@ public class Fire {
 
     private final Random random = new Random();
 
+    /**
+     * <h1>burnTrees</h1>
+     * Metoda wypalająca drzewa na plaszy.
+     * Jeśli ogień wyczerpał zasoby w komórce, drzewo zostaje spalone.
+     * @param board wygenerowana plansza
+     */
     public void burnTrees(Board board) {
 
         for (int x = 0; x < board.getWidth(); x++) {
@@ -33,7 +39,12 @@ public class Fire {
             }
         }
     }
-
+    /**
+     * <h1>spreadFire</h1>
+     * Metoda rozprzestrzeniająca ogień na plaszy.
+     * <li>Ogień ma random.nextDouble() < spreadChance na rozprzestrzenienie się
+     * @param board wygenerowana plansza
+     */
     public void spreadFire(Board board) {
 
         for (int x = 0; x < board.getWidth(); x++) {

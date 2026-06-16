@@ -19,8 +19,6 @@ public class Simulation {
     private List<int[]> firefighs = new ArrayList<>();
     private List<int[]> helis = new ArrayList<>();
 
-
-
     public Simulation(int width, int height, double forestation, int numFireFigh, int numHeli, int resources, double spredChance) {
         this.numFireFigh = numFireFigh;
         this.numHeli = numHeli;
@@ -34,6 +32,11 @@ public class Simulation {
         fire = new Fire(spredChance);
     }
 
+    /**
+     * <h1>initialize</h1>
+     * Metoda tworząca strażaków i helikopterów (inicjuje ich położenie itp.) oraz zapala
+     * las z lewej strony plaszy
+     */
     public void initialize() {
         stepCount=0;
         isRunning=true;
@@ -61,7 +64,10 @@ public class Simulation {
         }
     }
 
-
+    /**
+     * <h1>step</h1>
+     * Metoda dysponująca zachowaniem ognia, strażaków i helikopterów w jednym kroku
+     */
     public void step() {
         stepCount ++;
         for(int i=0;i<=1;i++){ ///Część logiki strażaków i helikopterów
@@ -80,12 +86,23 @@ public class Simulation {
                 board.getBurningPercentage(),
                 board.getBurnedPercentage());
     }
+    /**
+     * <h1>run</h1>
+     * Metoda dokonywująca kroków symulacji
+     * @param steps liczba kroków symulacji
+     */
     public void run(int steps){
         for (int i = 0; i < steps; i++) {
 
             step();
         }
     }
+
+    /**
+     * <h1>getBurningPercentage</h1>
+     * Metoda licząca procent płonącego się lasu.
+     * @return procent palącego się lasu
+     */
     public double getBurningPercentage() {
 
         double burning = 0;
@@ -104,6 +121,12 @@ public class Simulation {
         }
         return burning / board.getNumForest() *100;
     }
+
+    /**
+     * <h1>getBurnedPercentage</h1>
+     * Metoda licząca procent spalonego lasu.
+     * @return procent spalonego lasu
+     */
     public double getBurntPercentage() {
 
         double burnt = 0;
