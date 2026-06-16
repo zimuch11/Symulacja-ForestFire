@@ -305,52 +305,6 @@ public class Board {
         return false;
     }
 
-    /**
-     * <h1>getBurningPercentage</h1>
-     * Metoda licząca procent płonącego się lasu.
-     * @return procent palącego się lasu
-     */
-    public double getBurningPercentage() {
-
-        int burning = 0;
-
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-
-                Cell cell = cells[x][y];
-
-                if (cell instanceof Cell forest &&
-                        forest.isOnFire()) {
-
-                    burning++;
-                }
-            }
-        }
-
-        return 100.0 * burning / numForest;
-    }
-
-    /**
-     * <h1>getBurnedPercentage</h1>
-     * Metoda licząca procent spalonego lasu.
-     * @return procent spalonego lasu
-     */
-    public double getBurnedPercentage() {
-
-        int burned = 0;
-
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-
-                if (cells[x][y] instanceof BurntCell) {
-                    burned++;
-                }
-            }
-        }
-
-        return 100.0 * burned / numForest;
-    }
-
     public int getWidth() {
         return width;
     }

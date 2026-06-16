@@ -25,11 +25,19 @@ public class ForestCell extends Cell {
         return onFire;
     }
 
+    /**<h1> burn <h1>
+     * Metoda odpowiadajaca za proces palenia się komorki. Z każdym wywołaniem zmniejsza ilość resources o 1.
+     */
     public void burn() {
         if (resources > 0) {
             resources--;
         }
     }
+
+    /**<h1> isBurnt <h1>
+     * Metoda sprawdzająca czy dana komórka jest spalona.
+     * @return zwraca true, gdy jest spalona i false w przeciwnym wypadku
+     */
     public boolean isBurnt(){
         if (resources<=0) return true;
         else return false;

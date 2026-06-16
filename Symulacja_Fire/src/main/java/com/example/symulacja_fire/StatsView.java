@@ -11,6 +11,9 @@ public class StatsView {
     private final Label burntLabel;
     private final Label burningLabel;
 
+    /**<h1>StatsView<h1>
+     *Metoda odpowiadająca za stworznie pola statystyk
+     */
     public StatsView() {
         burntLabel = new Label("Spalony las: 0.0%");
         burntLabel.setFont(new Font("Arial", 16));
@@ -38,6 +41,9 @@ public class StatsView {
         return container;
     }
 
+    /**<h1>update<h1>
+     *Metoda odpowiedzialana za aktualizacje statystyk.
+     */
     public void update(Simulation simulation) {
         double burntPercent = simulation.getBurntPercentage();
         double burningPercent = simulation.getBurningPercentage();

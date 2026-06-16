@@ -76,15 +76,11 @@ public class Simulation {
         }
         fire.burnTrees(board);
         fire.spreadFire(board);
-//        if (board.cityOnFire()&&stepCount==250) {
-//            isRunning = false;
-//            System.out.println("Ogień dotarł do miasta: "+"Heli: "+numHeli+ " Strazak: "+numFireFigh);
-//        }
         System.out.printf(
                 "Step %d |Burning: %.2f%% | Burned: %.2f%%%n",
                 stepCount,
-                board.getBurningPercentage(),
-                board.getBurnedPercentage());
+                getBurningPercentage(),
+                getBurntPercentage());
     }
     /**
      * <h1>run</h1>

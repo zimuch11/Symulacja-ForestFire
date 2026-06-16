@@ -23,6 +23,10 @@ public class Main extends Application {
     private Timeline timeline;
 
 
+    /**<h1> start <h1>
+     * Metoda odpowiadająca za uruchomienie symulacji zależnie od zadanych parametrów.
+     *Łączy obrazy tworzone przez klasy BoardView oraz StatsView oraz tworzy timeline, określająą szybkość symulacji.
+     */
     @Override
     public void start(Stage stage) {
 

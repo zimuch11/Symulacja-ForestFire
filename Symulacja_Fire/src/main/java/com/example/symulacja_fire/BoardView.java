@@ -19,6 +19,10 @@ public class BoardView {
 
     }
 
+    /**<h1>draw<h1>
+     * Metoda odpowiadająca za rysowanie planszym, na której przebiega symulacja.
+     * Rysuje plansze zgodnie z zadaną wielkością, określa rozmiar pojedyńczej komórki, a następnie nadaje odpowiednie kolory komórką i agentą.
+     */
     public void draw() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
