@@ -76,11 +76,11 @@ public class Simulation {
         }
         fire.burnTrees(board);
         fire.spreadFire(board);
-        System.out.printf(
-                "Step %d |Burning: %.2f%% | Burned: %.2f%%%n",
-                stepCount,
-                getBurningPercentage(),
-                getBurntPercentage());
+//        System.out.printf(
+//                "Step %d |Burning: %.2f%% | Burned: %.2f%%%n",
+//                stepCount,
+//                getBurningPercentage(),
+//                getBurntPercentage());
     }
     /**
      * <h1>run</h1>

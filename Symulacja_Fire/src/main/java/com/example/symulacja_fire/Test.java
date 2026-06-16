@@ -5,7 +5,7 @@ public class Test {
 
     public static void main(String[] args) {
 
-        //testSpreadChance();
+        testSpreadChance();
     }
 
     public static void testSpreadChance() {
@@ -24,7 +24,7 @@ public class Test {
                 0.2,
         };
 
-        int repetitions = 30;
+        int repetitions = 1;
 
         for (double spreadChance : spreadChances) {
 
@@ -40,7 +40,7 @@ public class Test {
                                 31,
                                 0,
                                 35,
-                                0.2
+                                spreadChance
                         );
 
                 simulation.initialize();
