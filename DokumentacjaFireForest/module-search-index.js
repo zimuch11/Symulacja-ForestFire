@@ -1,1 +1,0 @@
-moduleSearchIndex = [{"l":"com.example.symulacja_fire"}];updateSearchResults();

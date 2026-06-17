@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.example.symulacja_fire","l":"com.example.symulacja_fire"}];updateSearchResults();
