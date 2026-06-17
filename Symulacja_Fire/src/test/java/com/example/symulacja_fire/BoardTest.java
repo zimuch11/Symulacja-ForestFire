@@ -1,5 +1,7 @@
 package com.example.symulacja_fire;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
@@ -8,18 +10,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
     @Test
-    public void moveFirefigh_shouldBeRepeatableWithSeed() {
+    public void getClosestfireTest() {
+        Board board = new Board(5, 5, 0.0, 10);
 
-        Random r = new Random(42);
+        ForestCell forestCell1 = new ForestCell(10);
+        ForestCell forestCell2 = new ForestCell(10);
+        board.setCell(1, 2, forestCell1);
+        board.setCell(3,4, forestCell2);
+        forestCell1.ignite();
+        forestCell2.ignite();
 
-        List<int[]> fire = List.of(new int[]{5, 5});
-        int[] pos = new int[]{10, 10};
+        var result = Board.getClosestfire(0, 0, 0, 10, 0, 0);
 
-        int nxt = r.nextInt(2);
-
-        int[] result = Board.moveFirefigh(fire, pos);
-
-        assertNotNull(result);
+        assertEquals(1, result.get(0)[0]); // x
+        assertEquals(2, result.get(0)[1]); // y
     }
-
 }
+
+

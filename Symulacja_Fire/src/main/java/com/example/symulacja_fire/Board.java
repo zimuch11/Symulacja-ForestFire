@@ -287,27 +287,6 @@ public class Board {
         return fuelloss;
     }
 
-    /**
-     * <h1>getBurnedPercentage</h1>
-     * Metoda licząca procent spalonego lasu.
-     * @return procent spalonego lasu
-     */
-    public double getBurnedPercentage() {
-
-        int burned = 0;
-
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-
-                if (cells[x][y] instanceof BurntCell) {
-                    burned++;
-                }
-            }
-        }
-
-        return 100.0 * burned / numForest;
-    }
-
     public boolean cityOnFire() {
 
         for (int x = 0; x < width; x++) {
